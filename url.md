@@ -1,4 +1,9 @@
 # Dokumentasi Module url.js
+# url.js
+
+Since       : v1.0.0  
+Environment : Browser Only  
+Dependency  : window, URLSearchParams  
 
 ## 1. Deskripsi Umum
 
@@ -8,7 +13,21 @@ Module `url.js` adalah bagian dari pustaka JavaScript ringan (CrootJS) yang dira
 - **Ketergantungan pada window.location**: Module ini secara ketat membungkus dan memodifikasi properti dari objek global `window.location` dan `window` (termasuk antarmuka `eventListener`). 
 - **Lingkungan eksekusi (browser-only)**: Karena bergantung secara eksklusif pada ketersediaan objek `window` (yang merepresentasikan jendela *tab* dari peramban web), module ini **hanya dapat dieksekusi di dalam lingkungan browser** dan tidak didukung pada sisi komputasi peladen (*server-side*).
 
----
+## Ringkasan Fungsi
+
+| Function | Tipe | Efek Samping |
+|----------|------|--------------|
+| getProtocol | Read | - |
+| getHost | Read | - |
+| fullPath | Read | - |
+| folderPath | Read | - |
+| getPath | Read | - |
+| getQueryString | Read | - |
+| setQueryString | Write | Reload |
+| getHash | Read | - |
+| setHash | Write | Add History |
+| redirect | Navigation | Replace History |
+| onHashChange | Event | Register Listener |
 
 ## 2. Spesifikasi Fungsi
 
@@ -295,7 +314,11 @@ onHashChange((event) => {
 **Catatan Penting / Efek Samping:**  
 Berpotensi mendaftarkan tumpukan fungsi memori berkelipatan bila dieksekusi berulang-ulang, menumpuk jumlah listener memori komputasi peramban web pada objek `window`. Listener yang sudah menempel bertugas secara laten mengawasi (*listen*) seumur instansi durasi penjelajahan situs berlangsung atau minimal hingga pemuatan ulang total (*reload*) mendistruksi seluruh instance listener. Fitur esensial dalam rancangan arsitektur *Single Page Application* (SPA).
 
----
+## Keamanan
+
+- redirect() tidak melakukan validasi URL eksternal
+- Input query tidak disanitasi secara internal
+- Validasi sepenuhnya menjadi tanggung jawab developer
 
 ## 3. Efek Samping & Perilaku Khusus
 
@@ -315,3 +338,10 @@ Berpotensi mendaftarkan tumpukan fungsi memori berkelipatan bila dieksekusi beru
 - **Tidak bisa digunakan di Node.js**: Karena Node.js terisolir dan berbasis perangkat peladen untuk abstraksi berkas dan penjelajah C++, platform ini tidak bisa membangkitkan dan tidak memahami hierarki hierodul sentris global bernama `window`, apalagi membongkarnya menjadi entitas properti penunjuk antarmuka peramban layaknya `location` dan rentetan modifikasi parametriknya.
 - **Tidak *Server-Side Rendering* (SSR) compatible**: Rata-rata *framework* reaktivitas moderen yang merakit aplikasi *Isomorphic* berwawasan (*Next.js/Nuxt.js* pada kondisi pelembagaan utilitas fungsi `url.js` perintis awal) pastinya mutlak mengalami resiko kebobolan pelaporan galat peramban memicu error logikal karena rujukan referensi objeknya bernilai tak terkonfigurasi pada mesinnya ("`window is not defined`"). Karenanya modul utilitas wajib ditempatkan di dalam cakupan *hook lifecycle browser* seperti `useEffect`.
 - **Bergantung mutlak pada window object**: Operasi logis fungsional menuntut keterikatan murni atas variabel mutlak `window` alias antarmuka global asali, dan tidak menyediakan mekanisme modifikasi untuk merujuk pada objek konfigurasi kustom (*Inversion of Control* rekayasa yang spesifik atau mock-up khusus), mengharuskannya tunduk utuh bersama konfigurasi peramban berplatform murni untuk mensurvensi properti semacam `location.host, location.pathname, location.protocol` berikut interseptor kejadian DOM semacam integrasi *Event Listener*.
+
+## Version
+
+v1.0.0
+- Initial release
+- Basic URL utilities
+- Hash listener support
