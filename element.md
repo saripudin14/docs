@@ -3,7 +3,7 @@
 > **CrootJs** adalah library JavaScript ringan untuk menyederhanakan manipulasi DOM dan event handling di sisi klien.
 
 ---
-
+## Muhammad Arif Rivaldi
 ## 📋 Daftar Isi
 
 - [Instalasi & Import](#instalasi--import)
@@ -114,7 +114,7 @@ setInner('tbodyHasil', rows);
 ```
 
 ---
-
+## Affifah Putri Deza
 # Dokumentasi Modul element.js
 
 ## 1. Pendahuluan
@@ -236,3 +236,86 @@ Pada contoh di atas, file `about.html` akan dimuat dan ditampilkan di dalam elem
 Modul `element.js` membantu pengelolaan elemen dan event secara lebih efisien.
 
 Fungsi `renderHTML` memungkinkan pemuatan konten HTML secara dinamis menggunakan asynchronous JavaScript dan manipulasi DOM, sehingga mendukung pengembangan website yang modular, ringan, dan tidak bergantung pada framework kompleks.
+
+
+-------------------------- 
+## Muhammad Rashid Al Savero (714240006)
+# 3. Dokumentasi Fungsi onInput
+
+## 3.1 Deskripsi
+
+Fungsi `onInput` digunakan untuk menambahkan event listener pada elemen HTML yang akan dijalankan setiap kali terjadi perubahan input dari pengguna.
+
+Event ini biasanya digunakan pada elemen seperti:
+- `<input>`
+- `<textarea>`
+- `<select>`
+
+Fungsi ini mempermudah penanganan event `input` tanpa perlu menuliskan `addEventListener` secara manual.
+
+---
+
+## 3.2 Sintaks
+
+```javascript
+onInput(id, callback)
+```
+
+---
+
+## 3.3 Parameter
+
+- **`id`**  
+  ID elemen HTML yang ingin dipasangkan event input.
+
+- **`callback`**  
+  Fungsi yang akan dijalankan setiap kali terjadi perubahan nilai pada elemen.
+
+---
+
+## 3.4 Cara Kerja
+
+1. Mencari elemen menggunakan `document.getElementById()`.
+2. Jika elemen tidak ditemukan, sistem akan menampilkan error di console.
+3. Menambahkan event listener `input` ke elemen tersebut.
+4. Setiap kali pengguna mengetik atau mengubah nilai, fungsi `callback` akan dijalankan.
+5. Nilai terbaru dari input dapat diakses melalui `event.target.value`.
+
+---
+
+## 3.5 Contoh Penggunaan
+
+### HTML
+
+```html
+<input type="text" id="username" placeholder="Masukkan nama">
+<p id="output"></p>
+```
+
+### JavaScript
+
+```javascript
+onInput("username", (event) => {
+    const value = event.target.value;
+    document.getElementById("output").innerText = value;
+});
+```
+
+Pada contoh di atas, setiap kali pengguna mengetik pada input, teks akan langsung ditampilkan di elemen `<p>`.
+
+---
+
+## 3.6 Kegunaan
+
+- Validasi input secara real-time
+- Menampilkan preview teks secara langsung
+- Membuat fitur pencarian live (live search)
+- Meningkatkan interaktivitas user interface
+
+---
+
+## 4. Kesimpulan
+
+Fungsi `onInput` mempermudah pengelolaan event input pada elemen HTML dengan cara yang lebih ringkas dan terstruktur.
+
+Dengan fungsi ini, developer dapat membuat interaksi real-time tanpa harus menulis kode event listener secara berulang, sehingga kode menjadi lebih bersih, modular, dan mudah dipahami.
